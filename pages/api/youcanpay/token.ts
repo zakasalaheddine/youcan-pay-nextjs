@@ -20,5 +20,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     metadata: {}
   }
   const response = await generateToken(orderOption)
-  res.status(200).json({ response })
+  res.status(200).json({ token: response.token.id })
 }
