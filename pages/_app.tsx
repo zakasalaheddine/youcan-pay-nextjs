@@ -1,8 +1,17 @@
-import '../styles/globals.css'
+import 'styles/global.css'
 import type { AppProps } from 'next/app'
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Script
+        src="https://youcanpay.com/js/ycpay.js"
+        strategy="beforeInteractive"
+      />
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
