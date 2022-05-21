@@ -7,7 +7,7 @@ type tokenParams = {
   order_id: string
   success_url: string
   error_url: string
-  customer_ip: string
+  customer_ip: string | string[]
   customer: object | undefined
   metadata: object | undefined
 }
