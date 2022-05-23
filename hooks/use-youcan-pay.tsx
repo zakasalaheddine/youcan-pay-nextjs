@@ -27,6 +27,12 @@ export const useYouCanPay = (options: {
       youCanPay.current.renderCreditCardForm()
     }
   }
+  const renderCashPlusForm = () => {
+    // throw new Error('You Can Pay instance is not found')
+    if (youCanPay.current) {
+      youCanPay.current.renderCashPlusForm()
+    }
+  }
 
   const pay = (
     token: string,
@@ -37,5 +43,5 @@ export const useYouCanPay = (options: {
     youCanPay.current.pay(token).then(successCallBack).catch(errorCallBack)
   }
 
-  return { renderCreditCardForm, pay }
+  return { renderCreditCardForm, renderCashPlusForm, pay }
 }
