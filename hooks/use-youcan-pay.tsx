@@ -31,14 +31,18 @@ export const useYouCanPay = (
   const [token, setToken] = useState(false)
 
   const getYouCanPayToken = async () => {
-    const result = await getToken()
-    setToken(result.token)
+    try {
+      const result = await getToken()
+      setToken(result.token)
+    } catch (error) {
+      console.log('error')
+    }
   }
   useEffect(() => {
     const { publicKey, formContainer, locale, isSandbox, errorContainer } =
       options
-    if (initiatYCPay) {
-      youCanPay.current = new YCPay(publicKey, {
+    if (initiatYCPay && window.YCPay !== undefined) {
+      youCanPay.current = new window.YCPay(publicKey, {
         formContainer: formContainer,
         locale: locale,
         isSandbox: isSandbox,

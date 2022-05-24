@@ -1,15 +1,5 @@
 interface IRegexCards {
-  electron: RegExp
-  maestro: RegExp
-  dankort: RegExp
-  interpayment: RegExp
-  unionpay: RegExp
-  visa: RegExp
-  mastercard: RegExp
-  amex: RegExp
-  diners: RegExp
-  discover: RegExp
-  jcb: RegExp
+  [key: string]: RegExp
 }
 
 export const detectCardType = (number: string) => {
