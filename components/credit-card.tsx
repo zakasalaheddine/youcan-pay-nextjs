@@ -13,10 +13,13 @@ const CreditCard = ({
   cardHolder,
   cardExpMonth,
   cardExpYear,
-  cardCVV
+  cardCVV,
 }: ICreditCard) => {
   return (
-    <div className="relative w-2/3 mx-auto shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500 p-5 rounded-xl text-white font-bold">
+    <div
+      className="relative w-2/3 mx-auto shadow-xl bg-gradient-to-r from-cyan-500 to-blue-500 p-5 rounded-xl text-white font-bold"
+      data-cy="creditCard"
+    >
       <div className="flex items-center justify-between">
         <Image
           src="/assets/icons8-chip-card-80.png"
