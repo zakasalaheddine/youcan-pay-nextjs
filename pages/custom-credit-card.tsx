@@ -7,7 +7,7 @@ import { useYouCanPay } from 'hooks/use-youcan-pay'
 import {
   YOUCAN_API_TEST_MODE,
   YOUCAN_PUBLIC_KEY,
-  YOUCAN_SANDBOX_PUBLIC_KEY
+  YOUCAN_SANDBOX_PUBLIC_KEY,
 } from 'utils/constants'
 
 interface IErrors {
@@ -28,7 +28,7 @@ const CustomCreditCard: NextPage = () => {
       formContainer: '',
       locale: 'en',
       isSandbox: YOUCAN_API_TEST_MODE,
-      errorContainer: ''
+      errorContainer: '',
     },
     false
   )
@@ -44,7 +44,7 @@ const CustomCreditCard: NextPage = () => {
     cardExpMonth: '',
     cardExpYear: '',
     cardCVV: '',
-    hasErrors: false
+    hasErrors: false,
   })
 
   const resetErrors = () => {
@@ -54,56 +54,57 @@ const CustomCreditCard: NextPage = () => {
       cardExpMonth: '',
       cardExpYear: '',
       cardCVV: '',
-      hasErrors: false
+      hasErrors: false,
     })
   }
 
   const handlePayment = () => {
     resetErrors()
+    let hasErrors = false
     const isCreditCardValid = isValidCardNumber(cardNumber)
-    console.log(isCreditCardValid)
     if (typeof isCreditCardValid === 'string') {
       setErrors((prevErrors) => ({
         ...prevErrors,
         cardNumber: isCreditCardValid,
-        hasErrors: true
       }))
+      hasErrors = true
     }
     if (!cardHolder) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         cardHolder: 'Card Holder is Required',
-        hasErrors: true
       }))
+      hasErrors = true
     }
     if (!cardExpMonth) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         cardExpMonth: 'Card Expire Month is Required',
-        hasErrors: true
       }))
+      hasErrors = true
     }
     if (!cardExpYear) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         cardExpYear: 'Card Expire Year is Required',
-        hasErrors: true
       }))
+      hasErrors = true
     }
     if (!cardCVV) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         cardCVV: 'Card CVV Year is Required',
-        hasErrors: true
       }))
+      hasErrors = true
     }
-    if (!errors.hasErrors) {
+    if (!hasErrors) {
+      console.log(errors, !errors.hasErrors, hasErrors)
       manualPayment(
         {
           credit_card: cardNumber,
           card_holder_name: cardHolder,
           expire_date: `${cardExpMonth}/${cardExpYear}`,
-          cvv: cardCVV
+          cvv: cardCVV,
         },
 
         () => {
@@ -158,7 +159,10 @@ const CustomCreditCard: NextPage = () => {
           cardExpYear={cardExpYear}
           cardCVV={cardCVV}
         />
-        <div className="mb-5 mt-[-50px] p-5 pt-[50px] bg-white border-neutral-400 rounded-md shadow-xl">
+        <div
+          className="mb-5 mt-[-50px] p-5 pt-[50px] bg-white border-neutral-400 rounded-md shadow-xl"
+          data-cy="creditCardFormContainer"
+        >
           <div className="flex items-start flex-col uppercase my-5">
             <label htmlFor="creditCardNumber" className="text-neutral-400">
               Card Number
@@ -197,8 +201,8 @@ const CustomCreditCard: NextPage = () => {
               </div>
             )}
           </div>
-          <div className="flex justify-between my-5">
-            <div className="flex items-start flex-col uppercase">
+          <div className="flex flex-col md:flex-row justify-between my-5">
+            <div className="flex mb-5 md:my-0 items-start flex-col uppercase">
               <label htmlFor="creditCardNumber" className="text-neutral-400">
                 Expiration Month
               </label>
@@ -225,7 +229,7 @@ const CustomCreditCard: NextPage = () => {
                 </div>
               )}
             </div>
-            <div className="flex items-start flex-col uppercase">
+            <div className="flex mb-5 md:my-0 items-start flex-col uppercase">
               <label htmlFor="creditCardNumber" className="text-neutral-400">
                 Expiration Year
               </label>
@@ -249,7 +253,7 @@ const CustomCreditCard: NextPage = () => {
                 </div>
               )}
             </div>
-            <div className="flex items-start flex-col uppercase">
+            <div className="flex mb-5 md:my-0 items-start flex-col uppercase">
               <label htmlFor="creditCardNumber" className="text-neutral-400">
                 CVV
               </label>

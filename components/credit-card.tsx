@@ -37,10 +37,10 @@ const CreditCard = ({
           </div>
         )}
       </div>
-      <div className="text-center text-xl my-5">
+      <div className="text-center text-sm md:text-xl my-5">
         {cardNumber || '0000 0000 0000 0000'}
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between text-sm md:text-xl">
         <div>
           <span className="block font-light text-neutral-100 uppercase">
             Card Holder:
