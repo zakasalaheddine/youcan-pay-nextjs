@@ -163,7 +163,7 @@ const CustomCreditCard: NextPage = () => {
           className="mb-5 mt-[-50px] p-5 pt-[50px] bg-white border-neutral-400 rounded-md shadow-xl"
           data-cy="creditCardFormContainer"
         >
-          <div className="flex items-start flex-col uppercase my-5">
+          <div className="flex items-start flex-col uppercase my-5" data-cy="cardNumberForm">
             <label htmlFor="creditCardNumber" className="text-neutral-400">
               Card Number
             </label>
@@ -175,9 +175,10 @@ const CustomCreditCard: NextPage = () => {
               placeholder="0000 0000 0000 0000"
               value={cardNumber}
               onChange={(e) => handleInputChange('cardNumber', e)}
+              data-cy="cardNumberInput"
             />
             {errors['cardNumber'] && (
-              <div className="text-rose-600 text-xs capitalize">
+              <div className="text-rose-600 text-xs capitalize" data-cy="cardNumberError">
                 {errors['cardNumber']}
               </div>
             )}
